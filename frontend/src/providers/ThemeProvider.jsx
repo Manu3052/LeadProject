@@ -6,6 +6,7 @@ const ThemeProvider = ({ children }) => {
             primary: {main:'#0C1E45' },
             secondary: {main:'#27C05A'},
             white: {main: '#fff'},
+            blue: {main: '#2898BA'},
             success: {
                 main: '#1fa824',
             },

@@ -1,9 +1,10 @@
-import NavigationBar from "./components/NavigationBar";
+import { RegisterContainer } from "./pages/Register/RegisterContainer";
 
 const MainApp = () => {
   return (
     <div className="App">
-      <NavigationBar />
+      {/* <NavigationBar /> */}
+      <RegisterContainer />
     </div>
   );
 }
