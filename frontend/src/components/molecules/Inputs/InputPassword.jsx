@@ -7,7 +7,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useController } from 'react-hook-form';
 import FormErrors from '../form/FormError';
 
-export const InputPassword = ({ name, label, color="blue", required='true'}) => {
+export const InputPassword = ({id, name, label, color="blue", required='true'}) => {
     const [showPassword, setShowPassword] = useState(false);
     const { field, fieldState } = useController({ name });
 
@@ -18,6 +18,7 @@ export const InputPassword = ({ name, label, color="blue", required='true'}) => 
 
     return (
         <><TextField
+            id={id}
             name={name}
             value={field.value}
             label={label}

@@ -3,10 +3,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { RegisterComponent } from './RegisterComponent';
 import { useState } from 'react';
-import { useController } from "react-hook-form";
-
 
 export const RegisterContainer = () =>{
+  const [message, setMessage] = useState('')
+  const [displayMessage, setDisplayMessage] = useState(false)
+
   const defaultValues ={
     userName: '',
     userEmail: '',
@@ -14,34 +15,43 @@ export const RegisterContainer = () =>{
     userPasswordConfirmation: '',
   }   
 
-    //State
-    const [userData, setUserData] = useState('')
-
   const validationSchema = yup.object({
     userName: yup.string().required("É necessário preencher esse campo"),
     userEmail: yup.string().required("É necessário preencher esse campo"),
-    password: yup.string().required("É necessário preencher esse campo"),
-    userPasswordConfirmation: yup.string().required('É necessário preencher esse campo').oneOf([yup.ref('password')], 'As senhas devem ser iguais').matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Sua senha deve conter um caractere especial, um caratere  númerico, uma letra'),
+    password: yup.string().required("É necessário preencher esse campo").matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Sua senha deve ter no mínimo 8 digitos, conter um caractere especial, um caratere  númerico, uma letra'),
+    userPasswordConfirmation: yup.string().required('É necessário preencher esse campo').oneOf([yup.ref('password')], 'As senhas devem ser iguais'),
   });
 
   const resolver = yupResolver(validationSchema);
 
   const methods = useForm({
-    // mode: 'onBlur',
-    // criteriaMode: 'all',
+    mode: 'onBlur',
+    criteriaMode: 'all',
     defaultValues,
-    // resolver,
+    resolver,
   });
 
-
-  const handleSubmit = async (data) =>{
-    console.log('entrou')
-    console.log(data)
+  const handleSubmit = (data) =>{
     try {
-        localStorage.setItem("userRegister", data)
-        setUserData(data)
+      setDisplayMessage(false)
+      let userName = document.querySelector('#userName')
+      let userEmail = document.querySelector('#userEmail')
+      let password = document.querySelector('#password')
+      let userList = JSON.parse(localStorage.getItem('userList') || '[]')
+      userList.push(
+        {
+            userName: userName.value,
+            userEmail: userEmail.value,
+            password: password.value,
+          }
+        )
+
+        localStorage.setItem("userList", JSON.stringify(userList))
+        setDisplayMessage(true)
+        setMessage("Você foi cadastrado com sucesso!")
     } catch (error) {
-        
+      setDisplayMessage(false)
+      setMessage("Ocorreu um erro ao cadastrar usuário.")
     }
   }
   return (

@@ -40,6 +40,7 @@ export const RegisterComponent = ({ methods, onSubmit }) => {
                                 >
                                     <Grid item xs={12}>
                                         <InputText
+                                            id="userName"
                                             fullWidth
                                             name="userName"
                                             label="Seu nome completo"
@@ -50,16 +51,17 @@ export const RegisterComponent = ({ methods, onSubmit }) => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <InputEmail
+                                            id="userEmail"
                                             fullWidth
                                             name="userEmail"
                                             label="E-mail"
-                                            required
+                                            required={true}
                                             variant="outlined"
                                             color="blue"
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <InputPassword name="userPassword" label="Senha" />
+                                        <InputPassword id="password" name="password" label="Senha" />
                                     </Grid>
                                     <Grid item xs={12}>
                                         <InputPassword
@@ -68,7 +70,7 @@ export const RegisterComponent = ({ methods, onSubmit }) => {
                                         />
                                     </Grid>
                                     <Grid item xs={12}  style={{ textAlign: 'right', marginBottom: "10px" }}>
-                                        <LinkComponent text="Já possui uma conta?Fazer o login" href="/login"/>
+                                        <LinkComponent text="Já possui uma conta?Fazer o login" href="/"/>
                                     </Grid>
                                     <Grid item xs={12} style={{ textAlign: 'center' }}>
                                         <ButtonRegisterComponent color="secondary" text="Criar Conta"/>

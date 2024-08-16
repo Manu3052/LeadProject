@@ -3,12 +3,12 @@ import React from 'react';
 import { useController } from 'react-hook-form';
 
 import FormErrors from '../form/FormError';
-export const InputText = ({ name, label, placeholder, required="false" }) => {
+export const InputText = ({ id, name, label, placeholder, required="false" }) => {
   const { field, fieldState } = useController({ name });
-
   return (
     <>
       <TextField
+        id={id}
         required={required}
         name={name}
         label={label}
